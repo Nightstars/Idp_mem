@@ -1,4 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
@@ -15,6 +15,9 @@ namespace Idp_mem
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Address(),
+                new IdentityResources.Phone(),
+                new IdentityResources.Email()
             };
 
         public static IEnumerable<ApiResource> ApiResources =>
@@ -69,6 +72,62 @@ namespace Idp_mem
                     }
                 },
 
+                //wpf client
+                 new Client
+                {
+                    ClientId="wpf client",
+                    ClientSecrets =
+                    {
+                        new Secret("wpf client".Sha256())
+                    },
+                    ClientName="wpf client",
+                    AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes =
+                    {
+                        "scope1",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Phone,
+                        IdentityServerConstants.StandardScopes.Email
+                    }
+                },
+
+                  //mvc client,authorization code
+                 new Client
+                {
+                    ClientId="mvc client",
+                    ClientName="ASP .NET CORE MVC Client",
+                    ClientSecrets =
+                    {
+                        new Secret("mvc client".Sha256())
+                    },
+                    
+                    AllowedGrantTypes=GrantTypes.CodeAndClientCredentials,
+                     RedirectUris =
+                     {
+                         "https://localhost:5005/signin-oidc"
+                     },
+                     FrontChannelLogoutUri="https://localshot:5005/siginout-oidc",
+                     PostLogoutRedirectUris={
+                        "https://localhost:5005/signout-callback-oidc"
+                     },
+                     AllowOfflineAccess=true, //allow offline_access
+                     AlwaysIncludeUserClaimsInIdToken=true,//return all user info
+                     AccessTokenLifetime=60, //60 seconds
+
+                    AllowedScopes =
+                    {
+                        "scope1",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.Phone,
+                        IdentityServerConstants.StandardScopes.Address
+                    }
+                },
+
+
                 // interactive client using code flow + pkce
                 new Client
                 {
@@ -86,4 +145,4 @@ namespace Idp_mem
                 },
             };
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
