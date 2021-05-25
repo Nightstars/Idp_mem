@@ -163,6 +163,39 @@ namespace Idp_mem
                      }
                  },
 
+
+                 //mvc hybrid client
+                 new Client
+                 {
+                     ClientId="hybird client",
+                     ClientName="ASP.NET Core Hybrid ¿Í»§¶Ë",
+                     ClientSecrets={new Secret("hybrid secret".Sha256()) },
+
+                     AllowedGrantTypes=GrantTypes.Hybrid,
+
+                     RedirectUris =
+                     {
+                         "https://localhost:5007/signin-oidc"
+                     },
+                     PostLogoutRedirectUris =
+                     {
+                         "https://localhost:5007/signout-callback-oidc"
+                     },
+                     AllowOfflineAccess=true,
+                     AlwaysIncludeUserClaimsInIdToken=false,
+                     AllowedScopes={
+                         "scope1",
+                         IdentityServerConstants.StandardScopes.OpenId,
+                         IdentityServerConstants.StandardScopes.Profile,
+                         IdentityServerConstants.StandardScopes.OfflineAccess,
+                         IdentityServerConstants.StandardScopes.Email,
+                         IdentityServerConstants.StandardScopes.Address,
+                         IdentityServerConstants.StandardScopes.Phone
+                     },
+                     RequirePkce=false
+                 },
+
+
                 // interactive client using code flow + pkce
                 new Client
                 {
