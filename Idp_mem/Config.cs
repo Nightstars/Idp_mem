@@ -128,6 +128,41 @@ namespace Idp_mem
                 },
 
 
+                 //angular,implicit flow
+                 new Client{
+                     ClientId="angular-client",
+                     ClientName="Angular SPA ¿Í»§¶Ë",
+                     ClientUri="http://localhost:4200",
+
+                     AllowedGrantTypes=GrantTypes.Implicit,
+                     AllowAccessTokensViaBrowser=true,
+                     RequireConsent=true,
+                     AccessTokenLifetime=60*5,
+
+                     RedirectUris={
+                        "http://localhost:4200/signin-oidc",
+                        "http://localhost:4200/redirect-silentrenew"
+                     },
+
+                     PostLogoutRedirectUris =
+                     {
+                         "http://localhost:4200"
+                     },
+                     AllowedCorsOrigins =
+                     {
+                         "http://localhost:4200"
+                     },
+                     AllowedScopes=
+                     {
+                         "scope1",
+                         IdentityServerConstants.StandardScopes.OpenId,
+                         IdentityServerConstants.StandardScopes.Profile,
+                         IdentityServerConstants.StandardScopes.Email,
+                         IdentityServerConstants.StandardScopes.Phone,
+                         IdentityServerConstants.StandardScopes.Address
+                     }
+                 },
+
                 // interactive client using code flow + pkce
                 new Client
                 {
